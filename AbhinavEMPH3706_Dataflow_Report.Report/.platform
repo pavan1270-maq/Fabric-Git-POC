@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "AbhinavEMPH3706_Dataflow_Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a5298540-c85f-bc3b-4113-1733997b6af1"
+  }
+}
