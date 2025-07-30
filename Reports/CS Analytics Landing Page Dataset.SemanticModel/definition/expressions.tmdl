@@ -1,0 +1,77 @@
+expression 'Support ARR' =
+		let
+		   Source = AzureDataExplorer.Contents("gh-analytics.eastus.kusto.windows.net", "service_cs_analytics", "product_arr
+		| where type == 'Net ARR' and day >= datetime_add('month',-7,now())
+		| summarize ['Support ARR']=sum(support_arr) by day
+		", [MaxRows=null, MaxSize=null, NoTruncate=null, AdditionalSetStatements=null])
+		in
+		    Source
+	lineageTag: d86cc36a-d6cc-4b70-8bfb-3518962edfce
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Partner Involvement %' = ```
+		let
+		    Source = AzureDataExplorer.Contents("gh-analytics.eastus.kusto.windows.net", "service_cs_analytics", "let CTE_Num = pex_partner_involvement_dim
+		| where delivery_type in ('Partner Involved','Microsoft CE')
+		| join kind=inner pex_partner_involvement_fact on partner_involvement_id
+		| summarize Num=sum(total_billable_dollar_amount)
+		| extend Value=1;
+		
+		
+		let CTE_Den = pex_partner_involvement_fact
+		| summarize Den=sum(total_billable_dollar_amount)
+		| extend Value=1;
+		
+		CTE_Num 
+		| join kind=inner CTE_Den on Value
+		| project  ['Partner Involvement %'] = Num/Den", [MaxRows=null, MaxSize=null, NoTruncate=null, AdditionalSetStatements=null]),
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Partner Involvement %", Percentage.Type}})
+		in
+		    #"Changed Type"
+		```
+	lineageTag: aefda019-1fa7-46f2-9c20-1dee70f1e96b
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'CSAT - SQL' =
+		let
+		    Source = Sql.Database("ghdwprod-ondemand.sql.azuresynapse.net", "serverless", [Query="WITH cte AS (#(lf)select #(lf) FORMAT(survey_sent_date, 'MM-yy') month_date#(lf),experience_csat#(lf),team#(lf)#(lf),CASE#(lf)            WHEN experience_csat = 1#(lf)                THEN 1#(lf)            ELSE 0#(lf)            END AS CSATOneStar#(lf)        ,CASE#(lf)            WHEN experience_csat = 2#(lf)                THEN 1#(lf)            ELSE 0#(lf)            END AS csattwostar#(lf)        ,CASE#(lf)            WHEN experience_csat = 3#(lf)                THEN 1#(lf)            ELSE 0#(lf)            END AS CSATThreeStar#(lf)        ,CASE#(lf)            WHEN experience_csat = 4#(lf)                THEN 1#(lf)            ELSE 0#(lf)            END AS CSATFourStar#(lf)        ,CASE#(lf)            WHEN experience_csat = 5#(lf)                THEN 1#(lf)            ELSE 0#(lf)            END AS CSATFiveStar#(lf)from service_cs_analytics.supportv3_ticket_csat_survey_dim d#(lf)left join  service_cs_analytics.supportv3_ticket_csat_survey_fact f #(lf)on f.survey_id = d.survey_id#(lf)left join service_cs_analytics.supportv3_ticket_dim ti#(lf)on f.ticket_id = ti.ticket_id#(lf)left join  service_cs_analytics.supportv3_team_dim td#(lf)on td.team_id = f.team_id AND  is_affiliated_team = 'FALSE'#(lf)left join  service_cs_analytics.supportv3_squad_dim s#(lf)on s.squad_id = f.squad_id #(lf)AND  is_affiliated_team ='True'#(lf)--left join hive.service_cs_analytics.support_ticket_fields fl on fl.ticket_id = f.ticket_id#(lf)where #(lf)--convert(DATE,f.survey_sent_date)  between convert(date,'2023-06-01') AND convert(date,'2023-06-30') -->= DATE_TRUNC('month', NOW() - INTERVAL '6' month)#(lf) ti.reporting_flag = 'True'#(lf)--and COALESCE (squad,"""") not in (""t&s"")#(lf)--and s.is_support_squad#(lf)--and fl.squad <> 'T&S'#(lf)--AND fl.is_health_check = True#(lf)and team in  ('Premium Standard', 'Premium Plus', 'Technical','Security & Revenue Support','Enterprise')#(lf)and  survey_sent_date >= DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 1, 0)#(lf)AND survey_sent_date <= EOMONTH(DATEADD(MONTH, -1, GETDATE()))#(lf)#(lf) ) ,#(lf)#(lf)DEF#(lf)AS (#(lf) SELECT month_date, #(lf)--team,#(lf) sum(CSATOneStar) AS one,#(lf)        sum(CSATTwoStar) AS two,#(lf)        sum(CSATThreeStar) AS three,#(lf)        sum(CSATFourStar) AS four,#(lf)        sum(CSATFiveStar) AS five,#(lf)        count(experience_csat) AS SurveyCount#(lf)    FROM CTE#(lf) GROUP BY month_date, team#(lf)    )#(lf)SELECT month_date,#(lf)--team,#(lf)((one * 1 + two * 2 + three * 3 + four * 4 + five * 5) * 1.0 / SurveyCount * 1.0) AS SupportCSATAvg,#(lf)SurveyCount#(lf)FROM DEF#(lf)"]),
+		    #"Renamed Columns" = Table.RenameColumns(Source,{{"SupportCSATAvg", "CSAT"}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"CSAT", type number}})
+		in
+		    #"Changed Type"
+	lineageTag: 2d923d41-e63c-4990-b368-387cfa2cee2e
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+
+expression NDRR =
+		let
+		      Source = AzureDataExplorer.Contents("gh-analytics.eastus.kusto.windows.net", "service_cs_analytics", "customer_arr_retention_metrics
+		| where arr_type =='Total ARR' and measurement_date  ==  todatetime(  format_datetime(datetime_add('day', -1, now()), 'M/d/yyyy') )
+		| summarize NDRR = sum(ndrr_end)/sum(ndrr_start)  ", [MaxRows=null, MaxSize=null, NoTruncate=null, AdditionalSetStatements=null])
+		in
+		    Source
+	lineageTag: 8e9a1461-2e3d-4fb9-8777-f5690e1b5775
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'CSAT - KQL' =
+		let
+		      Source = AzureDataExplorer.Contents("gh-analytics.eastus.kusto.windows.net", "service_cs_analytics", "let cte1 = supportv3_ticket_csat_survey_dim #(lf)| join kind=leftouter (supportv3_ticket_csat_survey_fact| extend ['f.ticket_id']=ticket_id, ['f.team_id']=team_id) on survey_id;#(lf)// cte1#(lf)// | take 10#(lf)#(lf)let cte2 = cte1#(lf)| join kind=leftouter (supportv3_ticket_dim | extend ['ti.ticket_id']=ticket_id,['ti.reporting_flag']=reporting_flag) on $left.['f.ticket_id']==$right.['ti.ticket_id'];#(lf)#(lf) //cte2 #(lf)// | take 10#(lf)#(lf)let cte3= cte2#(lf)| join kind=leftouter  (supportv3_team_dim| where is_affiliated_team == 'false'| extend ['td.team_id']=team_id) on $left.['f.team_id']==$right.['td.team_id'];#(lf)#(lf)#(lf)#(lf)let final =cte3#(lf)| where team in  ('Premium Standard', 'Premium Plus', 'Technical','Security & Revenue Support','Enterprise')#(lf)and ['ti.reporting_flag']=='True' and survey_sent_date >=  startofmonth(datetime_add('month',-1,now())) and  survey_sent_date <= endofmonth(datetime_add('month' ,-1, now()));#(lf)#(lf)#(lf)final #(lf)| project survey_sent_date,experience_csat,team#(lf)| extend #(lf)    CSATOneStar   = iif(experience_csat == 1, 1, 0),#(lf)    CSATTwoStar   = iif(experience_csat == 2, 1, 0),#(lf)    CSATThreeStar = iif(experience_csat == 3, 1, 0),#(lf)    CSATFourStar  = iif(experience_csat == 4, 1, 0),#(lf)    CSATFiveStar  = iif(experience_csat == 5, 1, 0)#(lf)| summarize one =sum(CSATOneStar) , two=sum(CSATTwoStar), three=sum(CSATThreeStar), four=sum(CSATFourStar), five=sum(CSATFiveStar),SurveyCount=count(experience_csat) by format_datetime(survey_sent_date,'MM-yyyy'),team#(lf)| project#(lf)    survey_sent_date,#(lf)    team,#(lf)    SupportCSATAvg = todouble((one * 1 + two * 2 + three * 3 + four * 4 + five * 5)) / todouble(SurveyCount),#(lf)    SurveyCount#(lf)#(lf)#(lf)#(lf)#(lf)", [MaxRows=null, MaxSize=null, NoTruncate=null, AdditionalSetStatements=null])
+		in
+		    Source
+	lineageTag: db6ccde4-9a65-4612-8d23-09c54216ebf2
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

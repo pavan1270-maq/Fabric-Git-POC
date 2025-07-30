@@ -1,0 +1,20 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Support ARR","Announcements","Partner Involvement %","CSAT - SQL","NDRR","CSAT - KQL"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.145.1105.0 (25.07)+decbc46fce458c5b8d5109d6f32a743f2ac949c8
+
+ref table DateTableTemplate_b9f9e118-3936-4116-a475-eec92bd017ad
+ref table Announcements
+ref table LocalDateTable_5f2148fe-abff-4360-a813-b6a61c965309
+
+ref cultureInfo en-US
+
