@@ -1,5 +1,0 @@
-relationship b66f5647-dd91-4afe-9917-74a7eafdb6f9
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Announcements.Date
-	toColumn: LocalDateTable_5f2148fe-abff-4360-a813-b6a61c965309.Date
-
