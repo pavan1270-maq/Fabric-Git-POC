@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Pavan"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "448dcd93-2edb-4f5b-a7bf-30342214349f"
+  }
+}
