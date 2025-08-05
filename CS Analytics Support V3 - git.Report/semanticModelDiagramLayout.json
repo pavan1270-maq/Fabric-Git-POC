@@ -1,0 +1,181 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 138.17681221941231
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 81,
+            "y": 318
+          },
+          "nodeIndex": "DimAssignee",
+          "nodeLineageTag": "437846a7-f635-4c5a-b034-6e639423c4e1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 363,
+            "y": 0
+          },
+          "nodeIndex": "BridgeEscalationsIssue",
+          "nodeLineageTag": "a837877c-6542-494c-abd3-2bae69792097",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 694,
+            "y": 311
+          },
+          "nodeIndex": "DailySupportTicketsBacklogCount",
+          "nodeLineageTag": "a0679dd4-a256-4cb4-acb3-9c9bb82704ae",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1298.3270107107437,
+            "y": 504.49985965619766
+          },
+          "nodeIndex": "FactTicketCsatSurvey",
+          "nodeLineageTag": "27b233ce-73b4-4a11-b980-d5ce4fb9d363",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 956.69718448686194,
+            "y": 119.51175134987932
+          },
+          "nodeIndex": "DimTeam",
+          "nodeLineageTag": "84d8666a-171a-46f4-98db-ca093d4a8c5b",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 625.96273788520693,
+            "y": 1217.9705312328872
+          },
+          "nodeIndex": "DimSquad",
+          "nodeLineageTag": "3d209513-5e90-412a-86d3-1746fa689f9c",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1258.8333301544189,
+            "y": 1040
+          },
+          "nodeIndex": "CalendarDate",
+          "nodeLineageTag": "1d3d5d58-8188-4e84-b2f9-9923ebe9af2e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Layout 1",
+      "zoomValue": 63.20404594208425,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 2,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 219
+          },
+          "nodeIndex": "FactTicketComment",
+          "nodeLineageTag": "7276b4f0-5231-43ed-bc64-4cdb7eb71afb",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 607.33333206176758,
+            "y": 102.33333587646484
+          },
+          "nodeIndex": "FactTicket",
+          "nodeLineageTag": "77479ed5-178a-4e55-92a5-8106fe5721cb",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 257.33333206176758,
+            "y": 67.333335876464844
+          },
+          "nodeIndex": "DimProductTicketBridge",
+          "nodeLineageTag": "d1e76b75-d5ec-4f0e-9775-610ed8bf8817",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Layout 2",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Layout 2",
+  "defaultDiagram": "All tables"
+}
