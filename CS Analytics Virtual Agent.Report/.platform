@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "CS Analytics Virtual Agent"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c0d6205c-e58f-8080-4092-a61530d2f092"
+  }
+}
