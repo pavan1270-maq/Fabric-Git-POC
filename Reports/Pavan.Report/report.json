@@ -27,6 +27,15 @@
       "name": "ReportSection",
       "visualContainers": [
         {
+          "config": "{\"name\":\"882ad96bb2fb131f1d3b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":602,\"y\":394,\"width\":409,\"height\":279,\"z\":5001,\"tabOrder\":5001}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"FinancialData.Country\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"FinancialData\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Country\"},\"Name\":\"FinancialData.Country\",\"NativeReferenceName\":\"Country\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Basic'\"}}}}}],\"general\":[{\"properties\":{}}]}}}",
+          "filters": "[]",
+          "height": 279.00,
+          "width": 409.00,
+          "x": 602.00,
+          "y": 394.00,
+          "z": 5001.00
+        },
+        {
           "config": "{\"name\":\"a99f10a9cbe85e588ac0\",\"layouts\":[{\"id\":0,\"position\":{\"x\":58.208955223880594,\"y\":38.507462686567166,\"z\":0,\"width\":443.2835820895522,\"height\":280.2985074626866,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Y\":[{\"queryRef\":\"Sum(FinancialData.Sales)\"}],\"Category\":[{\"queryRef\":\"FinancialData.Country\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"FinancialData\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Sales\"}},\"Function\":0},\"Name\":\"Sum(FinancialData.Sales)\",\"NativeReferenceName\":\"Sum of Sales\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Country\"},\"Name\":\"FinancialData.Country\",\"NativeReferenceName\":\"Country\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Sales\"}},\"Function\":0}}}]},\"drillFilterOtherVisuals\":true,\"hasDefaultSort\":true}}",
           "filters": "[]",
           "height": 280.30,
