@@ -70,6 +70,15 @@
           "x": 601.79,
           "y": 22.39,
           "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"f43913eba12c5815e90f\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1011.044776119403,\"y\":344.77611940298505,\"z\":4001,\"width\":248.955223880597,\"height\":278.5074626865672,\"tabOrder\":4001}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Sum(FinancialData.Column)\"},{\"queryRef\":\"Sum(FinancialData.Cost)\"},{\"queryRef\":\"FinancialData.Country\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"FinancialData\",\"Type\":0}],\"Select\":[{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Column\"}},\"Function\":0},\"Name\":\"Sum(FinancialData.Column)\",\"NativeReferenceName\":\"Sum of Column\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Cost\"}},\"Function\":0},\"Name\":\"Sum(FinancialData.Cost)\",\"NativeReferenceName\":\"Sum of Cost\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Country\"},\"Name\":\"FinancialData.Country\",\"NativeReferenceName\":\"Country\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 278.51,
+          "width": 248.96,
+          "x": 1011.04,
+          "y": 344.78,
+          "z": 4001.00
         }
       ],
       "width": 1280.00
